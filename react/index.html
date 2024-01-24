@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="cs"><head><meta charset="utf-8">
+
+<!-- ------------------------------------------------------------ -->
+<style type="text/css">
+<!--
+body			{margin: 0% 1% 0% 2%; font-size: 100%}
+div#flex		{display: flex; width: 40vw; justify-content: space-between; align-items: center}
+div#flexInCenter	{flex-grow: 1; text-align: center}
+input			{padding: 6px 10px; color: white; border: 0}
+input.player		{background-color: blue}
+input.pc		{background-color: green}
+font			{font-size: 110%; margin-left: 4px; font-weight: bold}
+-->
+</style>
+</head>
+<!-- ------------------------------------------------------------ -->
+<body bgcolor=white text=black>
+
+<br><br>
+
+React komponenta 1, s JSX:<br>
+<div id="ReactComponent1_root_JSX"></div>
+
+<br><br><br>
+
+React komponenta 2, bez JSX:<br>
+<div id="ReactComponent2_root"></div>
+
+
+<!-- React -->
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+<!-- React JSX -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<!-- React componenta - s JSX -->
+<script src="index_ReactComponent1_JSX.js" type="text/babel"></script>
+<!-- React componenta - bez JSX -->
+<script src="index_ReactComponent2.js"></script>
+<!-- JS -->
+<script src="index_js.js"></script>
+</body>
+</html>
+
+
+
+
+

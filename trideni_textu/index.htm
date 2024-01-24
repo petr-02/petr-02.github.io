@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="cs"><head><meta charset="utf-8">
+<style type="text/css">
+<!--
+body			{margin: 2.15% 1% 0% 2%; font-size: 100%}
+input.dodhodnoty	{width: 5%; margin: 0.1% 0% 0% 0%}
+label			{font-size: 90%}
+label#text100		{font-size: 100%}
+button#start		{font-size: 105%; margin-top: 0.6%}
+div#pozn		{font-size: 90%}
+div.flexx		{display: flex; width: 100%; justify-content: space-between}
+div.it1			{width: 49.7%; background-color: lightblue}
+div.it2			{width: 49.7%; background-color: lightgreen}
+div.flexx2		{display: flex}
+input#button_vysledku1	{margin: 2px 0px 0px 3px}
+input#button_vysledku2	{margin: 34px 0px 0px 3px}
+
+-->
+</style></head>
+<body>
+
+<div class="flexx"><div class="it1">
+<br><form name="f0">
+<textarea name="f0sb" cols="55" rows="2" placeholder='zadejte, co se má z řetězce smazat'></textarea><br><br>
+<textarea name="f0sbn" cols="60" rows="2" placeholder="co místo toho přidat (chcete-li jen odebrat, nezadávejte)"></textarea><br><br>
+<textarea name="f0ss" cols="70" rows="5" placeholder='zadejte řetězec k úpravě'></textarea><br><br>
+<label for="lblstart">Dodatečné hodnoty (nepovinné)</label><br>
+<input type="number" min="0" step="1" name="f0start" id="lblstart" class="dodhodnoty" value="1"> &nbsp;<label for="lblstart"> <-- start (0 / 1 = od začátku)</label><br>
+<input type="number" min="0" step="1" name="f0end" id="lblend" class="dodhodnoty" value="0"> &nbsp;<label for="lblend"> <-- konec (0 = až po konec)</label><br>
+<input type="number" min="0" step="1" name="f0rp" id="lblrp" class="dodhodnoty" value="0"> &nbsp;<label for="lblrp"> <-- opakování (0 = všechny výskyty)</label><br>
+<input type="number" min="0" step="1" name="f0oc1" id="lbloc1" class="dodhodnoty" value="0"> &nbsp;<label for="lbloc1"> <-- kolik prvních výskytů vynechat</label><br>
+</form>
+<br><button id="start">start</button><br><br>
+</div>
+
+<div class="it2">
+<form name="f0p">
+<label for="lblupravovanytext" class="text100">upravovaný text</label><br>
+<textarea name="f0pss" cols="70" rows="10" id="lblupravovanytext" placeholder='&#10;sem si lze odložit text, který bude upravován&#10;&#10;tlačítkem níže lze poslat k úpravě&#10;(celý, nebo lze označit část, např. myší)'></textarea><br>
+<input type="button" value="načíst k úpravě" id="button_upravovanehotextu1">&nbsp;&nbsp;
+<input type="button" value="načíst k úpravě a smazat" id="button_upravovanehotextu2">&nbsp;&nbsp;
+<input type="button" value="delete" id="button_upravovanehotextu_delete">
+</form>
+</div></div>
+
+
+<br><br><br>
+
+
+<div class="flexx"><div class="it1">
+<form name="f1">
+<label for="lblvysledek" class="text100">výsledek</label><br>
+ <div class="flexx2"><div>
+<textarea name="f1vysledek" cols="70" rows="5" id="lblvysledek"></textarea>
+ </div><div>
+<input type="button" value="znovu upravit" id="button_vysledku1"><br>
+<input type="button" value="odložit" id="button_vysledku2">
+ </div></div>
+</form><br><br><br><br><br><br><br><br><br><br>
+<div id="pozn">poznámky<br>mezera i enter jsou znak</div>
+
+</div><div class="it2">
+
+<form name="f1p">
+<label for="lblhotovytext" class="text100">hotový text</label><br>
+<textarea name="f1photovytext" cols="70" rows="7" id="lblhotovytext" placeholder='místo pro odložení hotového textu'></textarea><br>
+<input type="button" value="delete" id="button_hotovehotextu_delete">
+</form><br><br><br><br><br><br><br><br><br>
+</div></div>
+
+
+
+<script src="js2.js"></script>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body></html>
+
+

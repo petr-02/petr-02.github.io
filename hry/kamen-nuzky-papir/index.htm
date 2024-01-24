@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="cs"><head><meta charset="utf-8">
+<style type="text/css">
+<!--
+body			{margin: 0% 1% 0% 2%; font-size: 100%}
+div#flex		{display: flex; width: 40vw; justify-content: space-between; align-items: center}
+div#flexInCenter	{flex-grow: 1; text-align: center}
+input			{padding: 6px 10px; color: white; border: 0}
+input.player		{background-color: blue}
+input.pc		{background-color: green}
+font			{font-size: 110%; margin-left: 4px; font-weight: bold}
+-->
+</style></head>
+<body>
+
+<br><br>
+<div id="flex"><div>
+<form name="fplayer">
+<font>hráč</font><br><br>
+<input type="button" name="kamen" value="kámen" class="player"><br><br>
+<input type="button" name="nuzky" value="nůžky" class="player"><br><br>
+<input type="button" name="papir" value="papír" class="player"><br><br>
+</form>
+</div>
+
+<div id="flexInCenter"></div>
+
+<div>
+<form name="fpc">
+<font>počítač</font><br><br>
+<input type="button" name="kamen" value="kámen" class="pc"><br><br>
+<input type="button" name="nuzky" value="nůžky" class="pc"><br><br>
+<input type="button" name="papir" value="papír" class="pc"><br><br>
+</form>
+</div></div>
+
+
+
+<script src="kamen-nuzky-papir.js"></script>
+</body></html>
+
+
+

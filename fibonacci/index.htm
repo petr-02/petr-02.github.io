@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="cs"><head><meta charset="utf-8">
+<style type="text/css">
+<!--
+body		{margin: 3.2% 0% 0% 3.4%; font-size: 105%}
+label#lln2	{display: inline-block; padding-bottom: 0.5%}
+-->
+</style></head>
+<body>
+
+<form name="n1">
+<label for="ln2" id="lln2">zadejte celé číslo v intervalu <1,1000> - lepší ale bude začít 2kou -, počet členů Fibonacciho posloupnosti</label><br>
+<input type="number" min="1" step="1" max="1000" name="n2" id="ln2" value="2"> &nbsp;
+<label for="ln2">počet členů posloupnosti "n"</label><br><br>
+<input type="number" min="3" step="1" max="20" name="n3" id="ln3" value="8"> &nbsp;
+<label for="ln3">počet desetinných míst (kvůli přesnosti)</label><br><br>
+<input type="button" id="btn1" value="click">
+</form>
+
+<br><br>
+vytvoříme si posloupnost, začíná ať 1 1, další člen a číslo má vždy tolik jednotek, kolik dohromady dva před ním, 1  &nbsp;1  &nbsp;2  &nbsp;3  &nbsp;5<br>
+vezmeme poslední dva a vytvoříme poměr jednoho k druhému, například 1:1, 1:2, 2:3, 3:5<br>
+je-li pravda, co se tvrdí, pak toto je Fibonacciho posloupnost, poměr dvou se zanedlouho přiblíží k tomu poměru, který chválí tolik lidí kvůli kráse, pojmenovávajíce ho zlatým řezem
+
+
+<p id="TT"></p>
+<br><br><br><br><br><br><br><br><br><br><br>
+
+<script src="js3.js"></script>
+</body></html>

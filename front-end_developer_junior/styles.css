@@ -1,0 +1,125 @@
+
+body         {margin: 0; background-image: linear-gradient(180deg, #142266 0%, #192A80 100%); color: white}
+img#office   {object-fit: cover; width: 100%; height: 399px}
+img.arrow    {width:20px}
+p            {margin:0px}
+ul#our_solution_content {
+  margin:0px;
+  padding:0px;
+  list-style-type: none;
+}
+ul#our_solution_content > li {
+  background: url("photo/arrow.svg") no-repeat 0px 0px;
+  padding: 0px 0px 4px 32px;
+}
+
+
+/* napsáno prvně pro telefon na výšku */
+
+
+div#flex_tablet_title {              /* spacer + content + spacer;; nadpisek pouze pro tablet */
+  display:none;
+  font: bold 36px/43px "League Spartan", sans-serif;
+  padding-bottom: 32px;
+}
+
+
+div#flex_main {                      /* spacer + content + spacer + content + spacer */
+  display:flex;
+  justify-content: space-between;
+}
+
+  div.flex_spacer {flex-basis: 5%; flex-shrink:0}   /* svislé mezery, po stranách a uprostřed */
+  div.only_high_screen {display:none}               /* svislá mezera uprostřed (a flex sloupec s obrázkem budovy) */
+
+  div#flex_column1 {
+    flex-basis: 90%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    display:flex;
+    flex-direction: column;
+  }
+
+     div#flex_column1 > div:nth-child(1) {
+       font: bold 32px/38px "League Spartan", sans-serif;
+       padding-bottom: 32px;
+     }
+
+     div#flex_column1 > div:nth-child(2) {
+       font: 14px/20px Arial, sans-serif;
+       color: rgba(255, 255, 255, 0.7);
+       padding-bottom: 32px;
+     }
+
+     div#flex_column1 > div:nth-child(3) {
+       font: bold 14px/17px "League Spartan", sans-serif;
+       border: 2px solid white;
+       align-self: start;
+       padding: 17px 24px 14px 24px;
+       margin-bottom: 32px;
+     }
+
+     div#flex_column1 > div:nth-child(4) {
+       background-color: #2E4099;
+       font: bold 16px/19px "League Spartan", sans-serif;
+       padding: 32px;
+     }
+     p#our_solution {
+       font: bold 14px/20px Arial, sans-serif;
+       color: rgba(255, 255, 255, 0.7);
+       padding-bottom: 16px;
+     }
+
+  div.flex_column2 {
+    display:none;
+    flex-grow: 1;
+    flex-direction: column;
+    text-align:center;
+  }
+
+     div.flex_column2 > div:nth-child(2) {
+       background-color: #FFFFFF;
+       padding: 32px;
+     }
+     p#voltair_office {
+       font: bold 20px/24px "League Spartan", sans-serif;
+       color: #192A80;
+       padding-bottom: 8px;
+     }
+     p#voltair_office_content{
+       font: 14px/20px Arial, sans-serif;
+       color: #666666;
+       width:544px;
+       margin:auto;
+     }
+
+
+@media only screen and (max-width: 767px){     /* telefon */
+  body {padding: 32px 0px}
+}
+  @media only screen and (orientation: portrait) {  /* telefon na výšku */
+    body {
+      background-image: none;
+      background-color: #192A80;
+    }
+  }
+@media only screen and (min-width: 768px){         /* tablet a pc */
+  div.only_high_screen {display:flex}              /* zobrazí prostřední spacer a flex sloupec s obrázkem budovy */
+}
+@media only screen and (min-width: 768px) and (max-width: 1199px){    /* tablet */
+  body                                {padding: 40px 0px}
+  div#flex_tablet_title               {display:flex}        /* nadpisek "Structural Analysis ..." se na tabletu zobrazuje jinde */
+  div#flex_column1 > div:nth-child(1) {display:none}
+  div.flex_spacer                     {flex-basis: 3%}
+  div#flex_column1                    {flex-basis: 352px}
+}
+@media only screen and (min-width: 1200px){       /* pc */
+  body                     {padding: 48px 0px}
+  div.flex_spacer          {flex-basis: 2.25%}
+  div#flex_column1         {flex-basis: 448px}
+  p#voltair_office_content {width:608px}
+  img#office               {height:576px}
+}
+
+
+

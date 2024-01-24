@@ -1,0 +1,6 @@
+
+body                              {font: 1vw "Times New Roman", serif; text-align: center; margin: 1.5vw}
+input#calc_name_pick-input-field  {font-size: 1.8vw; display:inline-block; height: 3vw; text-align: center}
+label#calc_name_pick-input-label  {font-size: 0.9vw}
+div#calc-space                    {font-size: 1.4vw; margin-top: 5vw; position: absolute; left:50%; transform:translateX(-50%); text-align:left}
+
