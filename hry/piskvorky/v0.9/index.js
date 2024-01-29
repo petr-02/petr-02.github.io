@@ -212,13 +212,13 @@ function checkWin(clickedCell, playerWhoClickedCellClassName) {
         return true;
     // check right top to left bottom (dimX, dimY, clickedCell_i, clickedCell_j)
     count = 1;
-    for (let i = clickedCell_i + 1, j = clickedCell_j - 1; i < dimY || j < -1; i++, j--) {
+    for (let i = clickedCell_i + 1, j = clickedCell_j - 1; i < dimY || j > -1; i++, j--) {
         if (HTMLElmCell[i][j].classList.contains(playerWhoClickedCellClassName))
             count++;
         else
             break;
     }
-    for (let i = clickedCell_i - 1, j = clickedCell_j + 1; i > -1 || j > dimX; i--, j++) {
+    for (let i = clickedCell_i - 1, j = clickedCell_j + 1; i > -1 || j < dimX; i--, j++) {
         if (HTMLElmCell[i][j].classList.contains(playerWhoClickedCellClassName))
             count++;
         else
