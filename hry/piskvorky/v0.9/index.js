@@ -132,7 +132,7 @@ function fillClickedCellWithCircleOrCross(clickedCell) {
 }
 function afterCircleDrawn(clickedCell) {
     if (checkWin(clickedCell, value.circle.className)) { // pokud právě nakresleným kolečkem hráč mající kolečka vyhrál
-        setTimeout(() => alert(`vyhrál ${value.circle.playerName}`), 1); // bez "setTimeout" se "alert" zpráva zobrazí ještě před namalováním kolečka
+        setTimeout(() => alert(`vyhrál ${value.circle.playerName}`), 5); // bez "setTimeout" se "alert" zpráva zobrazí ještě před namalováním kolečka
         HTMLElm.div.ticTacToeGridContainer.removeEventListener("click", gridContainerClick);
         return;
     }
@@ -141,7 +141,7 @@ function afterCircleDrawn(clickedCell) {
 }
 function afterCrossDrawn(clickedCell) {
     if (checkWin(clickedCell, value.cross.className)) {
-        setTimeout(() => alert(`vyhrál ${value.cross.playerName}`), 1);
+        setTimeout(() => alert(`vyhrál ${value.cross.playerName}`), 5);
         HTMLElm.div.ticTacToeGridContainer.removeEventListener("click", gridContainerClick);
         return;
     }
@@ -196,13 +196,13 @@ function checkWin(clickedCell, playerWhoClickedCellClassName) {
         return true;
     // check left top to right bottom (dimX, dimY, clickedCell_i, clickedCell_j)
     count = 1;
-    for (let i = clickedCell_i + 1, j = clickedCell_j + 1; i < dimY || j < dimX; i++, j++) {
+    for (let i = clickedCell_i + 1, j = clickedCell_j + 1; i < dimY && j < dimX; i++, j++) {
         if (HTMLElmCell[i][j].classList.contains(playerWhoClickedCellClassName))
             count++;
         else
             break;
     }
-    for (let i = clickedCell_i - 1, j = clickedCell_j - 1; i > -1 || j > -1; i--, j--) {
+    for (let i = clickedCell_i - 1, j = clickedCell_j - 1; i > -1 && j > -1; i--, j--) {
         if (HTMLElmCell[i][j].classList.contains(playerWhoClickedCellClassName))
             count++;
         else
@@ -212,13 +212,13 @@ function checkWin(clickedCell, playerWhoClickedCellClassName) {
         return true;
     // check right top to left bottom (dimX, dimY, clickedCell_i, clickedCell_j)
     count = 1;
-    for (let i = clickedCell_i + 1, j = clickedCell_j - 1; i < dimY || j > -1; i++, j--) {
+    for (let i = clickedCell_i + 1, j = clickedCell_j - 1; i < dimY && j > -1; i++, j--) {
         if (HTMLElmCell[i][j].classList.contains(playerWhoClickedCellClassName))
             count++;
         else
             break;
     }
-    for (let i = clickedCell_i - 1, j = clickedCell_j + 1; i > -1 || j < dimX; i--, j++) {
+    for (let i = clickedCell_i - 1, j = clickedCell_j + 1; i > -1 && j < dimX; i--, j++) {
         if (HTMLElmCell[i][j].classList.contains(playerWhoClickedCellClassName))
             count++;
         else

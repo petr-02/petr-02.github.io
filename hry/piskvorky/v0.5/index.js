@@ -80,8 +80,8 @@ function start() {
     HTMLElm.div.ticTacToeGridContainer.style.gridTemplateColumns = `repeat(${x},30px)`; // podle hodnoty "x" nastavuje css styl grid containeru hrací plochy na "grid-template-columns: repeat(x,30px)"
     HTMLElm.div.ticTacToeGridContainer.style.gridTemplateRows = `repeat(${y},30px)`;
     let gridCellsString = ""; // vyplňuje grid container hrací plochy buňkami
-    for (let i = 0; i < x; i++) {
-        for (let j = 0; j < y; j++) {
+    for (let i = 0; i < y; i++) {
+        for (let j = 0; j < x; j++) {
             gridCellsString += `<div data-i="${i}" data-j="${j}"></div>`;
         }
     }
