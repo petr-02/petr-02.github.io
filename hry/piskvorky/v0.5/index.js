@@ -106,11 +106,11 @@ HTMLElm.div.ticTacToeGridContainer.addEventListener("click", function (event) {
 });
 function fillCellWithCircleOrCross(cell) {
     if (value.whoIsTurn === 0) {
-        cell.classList.toggle(value.circle.className); // přidá buňce/grid_itemu css třídu, která v buňce vykreslí kroužek
+        cell.classList.add(value.circle.className); // přidá buňce/grid_itemu css třídu, která v buňce vykreslí kroužek
         afterCircleDrawn();
     }
     else {
-        cell.classList.toggle(value.cross.className);
+        cell.classList.add(value.cross.className);
         afterCrossDrawn();
     }
 }

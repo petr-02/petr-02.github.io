@@ -28,11 +28,11 @@ divTicTacToeGridContainer.addEventListener("click", function (event) {
 });
 function fillCellWithCircleOrCross(cell) {
     if (whoIsTurn === 0) {
-        cell.classList.toggle(circle); // přidá buňce/grid_itemu css třídu, která v buňce vykreslí kroužek
+        cell.classList.add(circle); // přidá buňce/grid_itemu css třídu, která v buňce vykreslí kroužek
         afterCircleDrawn();
     }
     else {
-        cell.classList.toggle(cross);
+        cell.classList.add(cross);
         afterCrossDrawn();
     }
 }

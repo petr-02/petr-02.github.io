@@ -122,11 +122,11 @@ function gridContainerClick(event) {
 }
 function fillClickedCellWithCircleOrCross(clickedCell) {
     if (value.whoIsTurn === 0) {
-        clickedCell.classList.toggle(value.circle.className); // přidá buňce/grid_itemu css třídu, která v buňce vykreslí kroužek
+        clickedCell.classList.add(value.circle.className); // přidá buňce/grid_itemu css třídu, která v buňce vykreslí kroužek
         afterCircleDrawn(clickedCell);
     }
     else {
-        clickedCell.classList.toggle(value.cross.className);
+        clickedCell.classList.add(value.cross.className);
         afterCrossDrawn(clickedCell);
     }
 }
