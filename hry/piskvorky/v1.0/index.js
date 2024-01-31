@@ -50,10 +50,6 @@ const value = {
     CSSClass: {
         drawingCircle: "drawing-circle",
         drawingCross: "drawing-cross",
-        strikingH: "striking-horizontal",
-        strikingV: "striking-vertical",
-        strikingLTtoRB: "striking-leftTop-to-rightBottom",
-        strikingRTtoLB: "striking-rightTop-to-leftBottom",
     },
     whoIsTurn: 0, // hodnota 0/1 určuje, zda-li táhne kolečko "0" nebo křížek "1"
 };
