@@ -1,0 +1,58 @@
+
+header {margin: 10px 0px}
+
+#span-displaying-who-is-turn {font-weight: bold}
+
+#input-dimension-of-playground-x, #input-dimension-of-playground-y, #input-number-of-winning-circles-or-crosses {
+ border: 1px solid #767676;
+ padding: 2px 3px; margin: 5px 0px;
+ width: 40px; color: grey;
+}
+
+button, p {margin: 0px 0px 7px 0px}
+
+
+#div-tic-tac-toe-grid-container {
+ margin: 10px 5px;
+ display: inline-grid;
+ background-color: dodgerBlue;
+ gap: 1px; padding: 1px;
+ /* (tento styl nastavuje JS) grid-template-columns: repeat(15,30px); */
+ /* (tento styl nastavuje JS) grid-template-rows: repeat(15, 30px); */
+}
+#div-tic-tac-toe-grid-container > div {
+ background-color: white;
+ position: relative;
+}
+
+.drawing-circle::before {				/* třída je přidávána skrze JS */
+ content: '';
+ width: 95%; height: 95%;
+ border: 2px solid blue; box-sizing: border-box;
+ border-radius: 50%;
+ position: absolute;
+ left: 50%; top: 50%;
+ transform: translate(-50%,-50%);
+}
+
+.drawing-cross::before {				/* třída je přidávána skrze JS */
+ content: '';
+ width: 130%; height: 2px;
+ background-color: green;
+ position: absolute;
+ left: 50%; top: 50%;
+ transform: translate(-50%,-50%) rotate(45deg);
+}
+.drawing-cross::after {					/* třída je přidávána skrze JS */
+ content: '';
+ width: 130%; height: 2px;
+ background-color: green;
+ position: absolute;
+ left: 50%; top: 50%;
+ transform: translate(-50%,-50%) rotate(-45deg);
+}
+
+
+
+
+
