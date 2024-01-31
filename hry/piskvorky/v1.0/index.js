@@ -279,7 +279,6 @@ function strikeWinningSeriesLTtoRB(dimX, dimY, clickedCellI, clickedCellJ, CSSCl
             HTMLElmCell[i][j].style.cssText = "position:relative;overflow:visible;";
             const canvas = document.createElement("canvas");
             HTMLElmCell[i][j].appendChild(canvas);
-            // canvas.setAttribute("width","32px"); canvas.setAttribute("height","32px");
             canvas.setAttribute("width", "32px");
             canvas.setAttribute("height", "32px");
             canvas.style.cssText = "position:absolute;left:-1px;top:-1px;z-index:1;";
