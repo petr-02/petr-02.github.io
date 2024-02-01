@@ -1,7 +1,5 @@
 "use strict";
 // *** definování vstupů *** //
-//const styleElm=document.createElement("style") as HTMLStyleElement;		// vytvoření <style> elementu a přidání do <head>
-//(document.querySelector("head") as HTMLHeadElement).appendChild(styleElm); 
 const HTMLElm = {
     span: {
         displayingWhoIsTurn: document.getElementById("span-displaying-who-is-turn"),
