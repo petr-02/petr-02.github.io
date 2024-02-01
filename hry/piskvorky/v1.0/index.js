@@ -74,7 +74,7 @@ function setDefaultAndLimitGameValues() {
     HTMLElm.input.dimensionOfPlaygroundY.max = value.dimensionOfPlaygroundY.max;
     HTMLElm.input.numberOfWinningCirclesOrCrosses.min = value.numberOfWinningCirclesOrCrosses.min;
     HTMLElm.input.numberOfWinningCirclesOrCrosses.max = value.numberOfWinningCirclesOrCrosses.max;
-    // barvy
+    // barva koleček, křížků a mřížky grid containeru
     HTMLElm.style.innerText += `#div-tic-tac-toe-grid-container {background-color: ${value.CSSStyle.gridColor} }`;
     HTMLElm.style.innerText += `.drawing-circle::before {border-color: ${value.CSSStyle.circleColor} }`;
     HTMLElm.style.innerText += `.drawing-cross::before {background-color: ${value.CSSStyle.crossColor} }`;
