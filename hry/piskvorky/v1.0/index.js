@@ -1,5 +1,7 @@
 "use strict";
 // *** definování vstupů *** //
+//const styleElm=document.createElement("style") as HTMLStyleElement;		// vytvoření <style> elementu a přidání do <head>
+//(document.querySelector("head") as HTMLHeadElement).appendChild(styleElm); 
 const HTMLElm = {
     span: {
         displayingWhoIsTurn: document.getElementById("span-displaying-who-is-turn"),
@@ -15,6 +17,11 @@ const HTMLElm = {
     div: {
         ticTacToeGridContainer: document.getElementById("div-tic-tac-toe-grid-container"),
     },
+    style: function () {
+        const styleElm = document.createElement("style");
+        document.querySelector("head").appendChild(styleElm);
+        return styleElm;
+    }(), // fce je přímo zavolána a vrací odkaz na html element dom objekt style
 };
 let HTMLElmCell; // proměnná, které bude přiřazeno dvourozměrné pole, které bude v prvcích obsahovat odkazy na html element dom objekty každé buňky grid containeru hrací plochy
 const value = {
@@ -44,8 +51,9 @@ const value = {
     },
     CSSStyle: {
         strikeLineColor: "rgb(10,10,10)",
-        circlePlayerNameColor: "blue",
-        crossPlayerNameColor: "green",
+        circleColor: "blue",
+        crossColor: "green",
+        gridColor: "DodgerBlue", // barva mřížky/grid grid containeru
     },
     CSSClass: {
         drawingCircle: "drawing-circle",
@@ -66,6 +74,11 @@ function setDefaultAndLimitGameValues() {
     HTMLElm.input.dimensionOfPlaygroundY.max = value.dimensionOfPlaygroundY.max;
     HTMLElm.input.numberOfWinningCirclesOrCrosses.min = value.numberOfWinningCirclesOrCrosses.min;
     HTMLElm.input.numberOfWinningCirclesOrCrosses.max = value.numberOfWinningCirclesOrCrosses.max;
+    // barvy
+    HTMLElm.style.innerText += `#div-tic-tac-toe-grid-container {background-color: ${value.CSSStyle.gridColor} }`;
+    HTMLElm.style.innerText += `.drawing-circle::before {border-color: ${value.CSSStyle.circleColor} }`;
+    HTMLElm.style.innerText += `.drawing-cross::before {background-color: ${value.CSSStyle.crossColor} }`;
+    HTMLElm.style.innerText += `.drawing-cross::after {background-color: ${value.CSSStyle.crossColor} }`;
 }
 setDefaultAndLimitGameValues();
 // *** definování tlačítka pro start hry, které podle rozměrů X a Y vykreslí hrací plochu *** //
@@ -150,11 +163,11 @@ function crossPlayerGo(clickedCell) {
 }
 function displayInHTMLIsTurnOfCirclePlayer() {
     HTMLElm.span.displayingWhoIsTurn.innerHTML = value.circle.playerName;
-    HTMLElm.span.displayingWhoIsTurn.style.color = value.CSSStyle.circlePlayerNameColor;
+    HTMLElm.span.displayingWhoIsTurn.style.color = value.CSSStyle.circleColor;
 }
 function displayInHTMLIsTurnOfCrossPlayer() {
     HTMLElm.span.displayingWhoIsTurn.innerHTML = value.cross.playerName;
-    HTMLElm.span.displayingWhoIsTurn.style.color = value.CSSStyle.crossPlayerNameColor;
+    HTMLElm.span.displayingWhoIsTurn.style.color = value.CSSStyle.crossColor;
 }
 // *** vyhodnocení vítěze a proškrtnutí vítězné série koleček/křížků *** //
 function checkWinAndIfStrikeWinningSeriesAndReturnTrue(clickedCell, CSSClassDrawingSymbolOfPlayerWhoClickedCell) {
@@ -204,16 +217,16 @@ function countWinningSeriesHorizontal(dimX, clickedCellI, clickedCellJ, CSSClass
 function strikeWinningSeriesHorizontal(dimX, clickedCellI, clickedCellJ, CSSClassDrawingSymbolOfPlayerWhoClickedCell) {
     for (let i = clickedCellI, j = clickedCellJ; j < dimX; j++) {
         if (HTMLElmCell[i][j].classList.contains(CSSClassDrawingSymbolOfPlayerWhoClickedCell)) {
-            HTMLElmCell[i][j].style.cssText = "position:relative;overflow:visible;";
-            HTMLElmCell[i][j].innerHTML = `<svg height='32' width='32' style="position:absolute;left:-1px;top:-1px;z-index:1;"> <line x1='0' y1='16' x2='32' y2='16' style='stroke:${value.CSSStyle.strikeLineColor};stroke-width:2;' /> </svg>`;
+            HTMLElmCell[i][j].style.position = "relative";
+            HTMLElmCell[i][j].innerHTML = `<svg height='34' width='34' style="position:absolute;left:-2px;top:-2px;z-index:1;"> <line x1='0' y1='17' x2='34' y2='17' style='stroke:${value.CSSStyle.strikeLineColor};stroke-width:2;' /> </svg>`;
         }
         else
             break;
     }
     for (let i = clickedCellI, j = clickedCellJ - 1; j > -1; j--) {
         if (HTMLElmCell[i][j].classList.contains(CSSClassDrawingSymbolOfPlayerWhoClickedCell)) {
-            HTMLElmCell[i][j].style.cssText = "position:relative;overflow:visible;";
-            HTMLElmCell[i][j].innerHTML = `<svg height='32' width='32' style="position:absolute;left:-1px;top:-1px;z-index:1;"> <line x1='0' y1='16' x2='32' y2='16' style='stroke:${value.CSSStyle.strikeLineColor};stroke-width:2;' /> </svg>`;
+            HTMLElmCell[i][j].style.position = "relative";
+            HTMLElmCell[i][j].innerHTML = `<svg height='34' width='34' style="position:absolute;left:-2px;top:-2px;z-index:1;"> <line x1='0' y1='17' x2='34' y2='17' style='stroke:${value.CSSStyle.strikeLineColor};stroke-width:2;' /> </svg>`;
         }
         else
             break;
@@ -238,16 +251,16 @@ function countWinningSeriesVertical(dimY, clickedCellI, clickedCellJ, CSSClassDr
 function strikeWinningSeriesVertical(dimY, clickedCellI, clickedCellJ, CSSClassDrawingSymbolOfPlayerWhoClickedCell) {
     for (let i = clickedCellI, j = clickedCellJ; i < dimY; i++) {
         if (HTMLElmCell[i][j].classList.contains(CSSClassDrawingSymbolOfPlayerWhoClickedCell)) {
-            HTMLElmCell[i][j].style.cssText = "position:relative;overflow:visible;";
-            HTMLElmCell[i][j].innerHTML = `<svg height='32' width='32' style="position:absolute;left:-1px;top:-1px;z-index:1;"> <line x1='16' y1='0' x2='16' y2='32' style='stroke:${value.CSSStyle.strikeLineColor};stroke-width:2;' /> </svg>`;
+            HTMLElmCell[i][j].style.position = "relative";
+            HTMLElmCell[i][j].innerHTML = `<svg height='34' width='34' style="position:absolute;left:-2px;top:-2px;z-index:1;"> <line x1='17' y1='0' x2='17' y2='34' style='stroke:${value.CSSStyle.strikeLineColor};stroke-width:2;' /> </svg>`;
         }
         else
             break;
     }
     for (let i = clickedCellI - 1, j = clickedCellJ; i > -1; i--) {
         if (HTMLElmCell[i][j].classList.contains(CSSClassDrawingSymbolOfPlayerWhoClickedCell)) {
-            HTMLElmCell[i][j].style.cssText = "position:relative;overflow:visible;";
-            HTMLElmCell[i][j].innerHTML = `<svg height='32' width='32' style="position:absolute;left:-1px;top:-1px;z-index:1;"> <line x1='16' y1='0' x2='16' y2='32' style='stroke:${value.CSSStyle.strikeLineColor};stroke-width:2;' /> </svg>`;
+            HTMLElmCell[i][j].style.position = "relative";
+            HTMLElmCell[i][j].innerHTML = `<svg height='34' width='34' style="position:absolute;left:-2px;top:-2px;z-index:1;"> <line x1='17' y1='0' x2='17' y2='34' style='stroke:${value.CSSStyle.strikeLineColor};stroke-width:2;' /> </svg>`;
         }
         else
             break;
@@ -272,19 +285,19 @@ function countWinningSeriesLTtoRB(dimX, dimY, clickedCellI, clickedCellJ, CSSCla
 function strikeWinningSeriesLTtoRB(dimX, dimY, clickedCellI, clickedCellJ, CSSClassDrawingSymbolOfPlayerWhoClickedCell) {
     for (let i = clickedCellI, j = clickedCellJ; i < dimY && j < dimX; i++, j++) {
         if (HTMLElmCell[i][j].classList.contains(CSSClassDrawingSymbolOfPlayerWhoClickedCell)) {
-            HTMLElmCell[i][j].style.cssText = "position:relative;overflow:visible;";
+            HTMLElmCell[i][j].style.position = "relative";
             const canvas = document.createElement("canvas");
             HTMLElmCell[i][j].appendChild(canvas);
-            canvas.setAttribute("width", "32px");
-            canvas.setAttribute("height", "32px");
-            canvas.style.cssText = "position:absolute;left:-1px;top:-1px;z-index:1;";
+            canvas.setAttribute("width", "34px");
+            canvas.setAttribute("height", "34px");
+            canvas.style.cssText = "position:absolute;left:-2px;top:-2px;z-index:1;";
             const ctx = canvas.getContext("2d");
             if (ctx) {
                 ctx.strokeStyle = value.CSSStyle.strikeLineColor;
                 ctx.lineWidth = 2;
                 ctx.beginPath();
                 ctx.moveTo(0, 0);
-                ctx.lineTo(32, 32);
+                ctx.lineTo(34, 34);
                 ctx.stroke();
             }
         }
@@ -293,19 +306,19 @@ function strikeWinningSeriesLTtoRB(dimX, dimY, clickedCellI, clickedCellJ, CSSCl
     }
     for (let i = clickedCellI - 1, j = clickedCellJ - 1; i > -1 && j > -1; i--, j--) {
         if (HTMLElmCell[i][j].classList.contains(CSSClassDrawingSymbolOfPlayerWhoClickedCell)) {
-            HTMLElmCell[i][j].style.cssText = "position:relative;overflow:visible;";
+            HTMLElmCell[i][j].style.position = "relative";
             const canvas = document.createElement("canvas");
             HTMLElmCell[i][j].appendChild(canvas);
-            canvas.setAttribute("width", "32px");
-            canvas.setAttribute("height", "32px");
-            canvas.style.cssText = "position:absolute;left:-1px;top:-1px;z-index:1;";
+            canvas.setAttribute("width", "34px");
+            canvas.setAttribute("height", "34px");
+            canvas.style.cssText = "position:absolute;left:-2px;top:-2px;z-index:1;";
             const ctx = canvas.getContext("2d");
             if (ctx) {
                 ctx.strokeStyle = value.CSSStyle.strikeLineColor;
                 ctx.lineWidth = 2;
                 ctx.beginPath();
                 ctx.moveTo(0, 0);
-                ctx.lineTo(32, 32);
+                ctx.lineTo(34, 34);
                 ctx.stroke();
             }
         }
@@ -332,19 +345,19 @@ function countWinningSeriesRTtoLB(dimX, dimY, clickedCellI, clickedCellJ, CSSCla
 function strikeWinningSeriesRTtoLB(dimX, dimY, clickedCellI, clickedCellJ, CSSClassDrawingSymbolOfPlayerWhoClickedCell) {
     for (let i = clickedCellI, j = clickedCellJ; i < dimY && j > -1; i++, j--) {
         if (HTMLElmCell[i][j].classList.contains(CSSClassDrawingSymbolOfPlayerWhoClickedCell)) {
-            HTMLElmCell[i][j].style.cssText = "position:relative;overflow:visible;";
+            HTMLElmCell[i][j].style.position = "relative";
             const canvas = document.createElement("canvas");
             HTMLElmCell[i][j].appendChild(canvas);
-            canvas.setAttribute("width", "32px");
-            canvas.setAttribute("height", "32px");
-            canvas.style.cssText = "position:absolute;left:-1px;top:-1px;z-index:1;";
+            canvas.setAttribute("width", "34px");
+            canvas.setAttribute("height", "34px");
+            canvas.style.cssText = "position:absolute;left:-2px;top:-2px;z-index:1;";
             const ctx = canvas.getContext("2d");
             if (ctx) {
                 ctx.strokeStyle = value.CSSStyle.strikeLineColor;
                 ctx.lineWidth = 2;
                 ctx.beginPath();
-                ctx.moveTo(0, 32);
-                ctx.lineTo(32, 0);
+                ctx.moveTo(0, 34);
+                ctx.lineTo(34, 0);
                 ctx.stroke();
             }
         }
@@ -353,19 +366,19 @@ function strikeWinningSeriesRTtoLB(dimX, dimY, clickedCellI, clickedCellJ, CSSCl
     }
     for (let i = clickedCellI - 1, j = clickedCellJ + 1; i > -1 && j < dimX; i--, j++) {
         if (HTMLElmCell[i][j].classList.contains(CSSClassDrawingSymbolOfPlayerWhoClickedCell)) {
-            HTMLElmCell[i][j].style.cssText = "position:relative;overflow:visible;";
+            HTMLElmCell[i][j].style.position = "relative";
             const canvas = document.createElement("canvas");
             HTMLElmCell[i][j].appendChild(canvas);
-            canvas.setAttribute("width", "32px");
-            canvas.setAttribute("height", "32px");
-            canvas.style.cssText = "position:absolute;left:-1px;top:-1px;z-index:1;";
+            canvas.setAttribute("width", "34px");
+            canvas.setAttribute("height", "34px");
+            canvas.style.cssText = "position:absolute;left:-2px;top:-2px;z-index:1;";
             const ctx = canvas.getContext("2d");
             if (ctx) {
                 ctx.strokeStyle = value.CSSStyle.strikeLineColor;
                 ctx.lineWidth = 2;
                 ctx.beginPath();
-                ctx.moveTo(0, 32);
-                ctx.lineTo(32, 0);
+                ctx.moveTo(0, 34);
+                ctx.lineTo(34, 0);
                 ctx.stroke();
             }
         }
