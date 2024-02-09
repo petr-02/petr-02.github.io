@@ -42,7 +42,7 @@ const value = {
         actual: 5,
     },
     circle: {
-        playerName: "Modrý hráč", // pro uživatele je hráč mající kolečka/circle zobrazen také jako "Modrý hráč" (neboť i kolečka jsou modrá), hráč s krížky/crosses jako "Zelený hráč"
+        playerName: "Modrý hráč", // pro uživatele je hráč majícího kolečka/circle zobrazen také jako "Modrý hráč" (neboť i kolečka jsou modrá), hráč s krížky/crosses jako "Zelený hráč"
     },
     cross: {
         playerName: "Zelený hráč",
