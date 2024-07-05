@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>sportoviště podle vlastností</title> <meta name="description" content="sportoviště v Brně podle zvolených vlastností">
+ <link rel="stylesheet" href="">
+<!-- ------------------------------------------------------------ -->
+<style type="text/css">
+<!--
+body            {font: 120% "Times New Roman", Times, serif; margin: 4.2vh 0.75% 64.5vh 3%;
+                 display:flex; flex-direction:column; gap: 2em 0em}       /* body is flex; having two flex-items: search form, content div */
+
+body > *        {border: 1px solid green}  /* delete */
+
+
+form {                                                                    /* search form is flex-item and grid at the same time; having grid-items: each search category div (of environment and accessibility, sport, surface, dimension, ...) */
+  font: 85% "Times New Roman", Times, serif;
+  align-self:center;                                                      /* flex-item setting */
+  width:45%;
+  display:grid;                                                           /* grid-container setting */
+  grid-template-columns: auto;
+  gap: 0.90em;
+}
+
+form>div {display:flex; flex-direction:column; gap: 0.2em}                /* search category divs are grid-items and flexes at the same time; having two flex-items: title of category, content */
+
+form>div>div.checkbox-grid {                                              /* some search category content divs, that with checkboxes, are flex-items and grids at the same time: environment and accessibility, sport, surface, district or university; having grid-items: each option of particular search category */
+  display:grid;                                                           /* --> body is one cell splitted into two, form and content div; form is splitted into many of search category divs; each search category div have two cells, of title div and content div; content div with checkboxes are splitted into cells of options */
+  width: 70%;
+  grid-template-columns: repeat(auto-fill, minmax(14ch,1fr));
+  flex-grow:1;
+  justify-content: left;
+  gap: 0.7em;
+  border: 1px solid grey;
+}
+/* form>div>div#cat3-content    { grid-template-columns: repeat(auto-fill, minmax(14ch,1fr)) } */  /* individual setting of checkboxes length */
+/* form>div>div#cat1-content    { grid-template-columns: repeat(auto-fill, minmax(12ch,1fr)) } */
+/* form>div>div#surface-content { grid-template-columns: repeat(auto-fill, minmax(14ch,1fr)) } */
+/* form>div>div#cat5-content    { grid-template-columns: repeat(auto-fill, minmax(12ch,1fr)) } */
+
+form>div>div>label {border: 1px solid white}  /* ?delete? zmenšit asi "gap: 0.7em" a zvětšit "height" labelu, aby byla větší plocha zaškrtávající checkbox */
+
+/* search form appearance adjustment */
+select,input           {padding: 0.3em 0.55em 0.3em 0.3em}
+label                  {font-size: 95%}
+#cat3-content > label,
+#cat1-content > label,
+#surface-content > label,
+#cat5-content > label {cursor:pointer}
+.dimension-input       {width:5ch}
+.price-input           {width:7ch}
+#submit-button         {width:70%; margin-top: 0.85em}
+.for-input-smaller-added-text    {font-size:0.9em; margin-left:0.1em}   /* explanation added to description */
+
+input[type="number"].first {margin-right:1ch}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0 }
+input[type="number"] { -moz-appearance: textfield }
+
+
+/* content css */
+a                     {color: black; text-decoration: none}
+h2                    {font-size:125%; line-height:1.01; color:blue; font-weight:500; margin:0; margin-top:0.7em}    /* below "content:"\A= ... \A" seems be adding some spacing, thus "line-height" is lowered and "margin-top" is lesser than one whole <br> */
+h2::before, h2::after {content:"\A=============================\A"; font-size:80%; color:black; white-space:pre}
+h3                    {font-size:100%; font-weight:500; display:inline-block; margin:0; margin-top:1.2em}
+h3::before, h3::after {content:"=="; font-size:100%; color:black}
+span.address          {}
+
+-->
+</style>
+<!-- ------------------------------------------------------------ -->
+</head>
+<body>
+
+<form id="search-form">
+
+ <div id="cat3-container" class="search-category-div">
+   <div id="cat3-title"> Prostředí a přístupnost </div>
+   <div id="cat3-content" class="checkbox-grid">
+     <!-- added by JS -->  <!-- e.g. "<label for='hřiště otevřené'> <input type='checkbox' name='category3' id='hřiště otevřené' value='hřiště otevřené'> hřiště otevřené</label>" -->
+   </div>
+ </div>
+
+
+ <div id="cat1-container" class="search-category-div">
+   <div id="cat1-title"> Sport </div>
+   <div id="cat1-content" class="checkbox-grid">
+     <!-- added by JS -->
+   </div>
+ </div>
+
+
+ <div id="surface-container" class="search-category-div">
+   <div id="surface-title"> Povrch </div>
+   <div id="surface-content" class="checkbox-grid">
+     <!-- added by JS -->
+   </div>
+ </div>
+
+
+ <div id="cat5-container" class="search-category-div">
+   <div id="cat5-title"> Městská část nebo univerzita </div>
+   <div id="cat5-content" class="checkbox-grid">
+     <!-- added by JS -->
+   </div>
+ </div>
+
+
+ <div id="dimension-container" class="search-category-div">
+   <div id="dimension-title"> Rozměr </div>
+   <div id="dimension-content">
+      <div id="dimension-width-div">
+        <input type="number" min="0" name="width" id="dimension-width-lower" placeholder="x ≥ ..." class="dimension-input first">
+        <input type="number" min="0" name="width" id="dimension-width-upper" placeholder="x ≤ ..." class="dimension-input">
+        <label for="dimension-width-div" id="dimension-width-label">metrů šířky</label>
+      </div>
+      <div id="dimension-length-div">
+        <input type="number" min="0" name="length" id="dimension-length-lower" placeholder="y ≥ ..." class="dimension-input first">
+        <input type="number" min="0" name="length" id="dimension-length-upper" placeholder="y ≤ ..." class="dimension-input">
+        <label for="dimension-length-div" id="dimension-length-label">metrů délky</label>
+      </div>
+      <div id="dimension-depth-div">
+        <input type="number" min="0" name="depth" id="dimension-depth-lower" placeholder="z ≥ ..." class="dimension-input first">
+        <input type="number" min="0" name="depth" id="dimension-depth-upper" placeholder="z ≤ ..." class="dimension-input">
+        <label for="dimension-depth-div" id="dimension-depth-label">metrů hloubky <span class="for-input-smaller-added-text">(tj. např. výška stropu, hloubka bazénu)</span></label>
+      </div>
+   </div>
+ </div>
+
+
+ <div id="price-container" class="search-category-div">
+   <div id="price-title"> Cena </div>
+   <div id="price-content">
+      <input type="number" min="0" name="price" id="price-min" placeholder="min" class="price-input first" hidden>
+      <input type="number" min="0" name="price" id="price-max" placeholder="max" class="price-input">
+   </div>
+ </div>
+
+ <div id="buttons-container">
+   <div>
+     <input type="button" id="submit-button" value="ok"> &nbsp; <input type="reset" id="reset-button">
+   </div>
+ </div>
+
+</form>
+
+
+<div id="content"></div>
+
+
+<script src="setCheckboxes.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
