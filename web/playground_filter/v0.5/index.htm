@@ -9,7 +9,7 @@
 body            {font: 120% "Times New Roman", Times, serif; margin: 4.2vh 0.75% 64.5vh 3%;
                  display:flex; flex-direction:column; gap: 2em 0em}       /* body is flex; having two flex-items: search form, content div */
 
-body > *        {border: 1px solid green}  /* delete */
+/* body > * {border: 1px solid green} */  /* border around search form and content div */
 
 
 form {                                                                    /* search form is flex-item and grid at the same time; having grid-items: each search category div (of environment and accessibility, sport, surface, dimension, ...) */
@@ -30,14 +30,16 @@ form>div>div.checkbox-grid {                                              /* som
   flex-grow:1;
   justify-content: left;
   gap: 0.7em;
-  border: 1px solid grey;
+  background-color: rgb(251,255,251);
+  border: 1px solid rgb(225,225,225);
 }
 /* form>div>div#cat3-content    { grid-template-columns: repeat(auto-fill, minmax(14ch,1fr)) } */  /* individual setting of checkboxes length */
 /* form>div>div#cat1-content    { grid-template-columns: repeat(auto-fill, minmax(12ch,1fr)) } */
 /* form>div>div#surface-content { grid-template-columns: repeat(auto-fill, minmax(14ch,1fr)) } */
 /* form>div>div#cat5-content    { grid-template-columns: repeat(auto-fill, minmax(12ch,1fr)) } */
 
-form>div>div>label {border: 1px solid white}  /* ?delete? zmenšit asi "gap: 0.7em" a zvětšit "height" labelu, aby byla větší plocha zaškrtávající checkbox */
+/* form>div>div>label {border: 1px solid black}  */  /* border arouns chechbox option label */
+
 
 /* search form appearance adjustment */
 select,input           {padding: 0.3em 0.55em 0.3em 0.3em}
@@ -46,10 +48,24 @@ label                  {font-size: 95%}
 #cat1-content > label,
 #surface-content > label,
 #cat5-content > label {cursor:pointer}
+
 .dimension-input       {width:5ch}
 .price-input           {width:7ch}
-#submit-button         {width:70%; margin-top: 0.85em}
 .for-input-smaller-added-text    {font-size:0.9em; margin-left:0.1em}   /* explanation added to description */
+
+#buttons-container     {margin-top: 0.65em}
+#submit-button         {width:51.375%}
+#reset-button          {width:17.125%; margin-left: 1.5%}
+.button {
+  padding: 0.48vw 0vw;
+  border: 0;
+  color: white;
+  background-color: grey;
+  transition: background-color 0.3s;
+  border-radius: 0.2vw;
+
+}
+.button:hover          {background-color: rgb(100,100,100)}
 
 input[type="number"].first {margin-right:1ch}
 input[type="number"]::-webkit-outer-spin-button,
@@ -137,7 +153,7 @@ span.address          {}
 
  <div id="buttons-container">
    <div>
-     <input type="button" id="submit-button" value="ok"> &nbsp; <input type="reset" id="reset-button">
+     <input type="button" id="submit-button" class="button" value="ok"><input type="reset" id="reset-button" class="button">
    </div>
  </div>
 
