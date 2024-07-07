@@ -1,17 +1,76 @@
 
-////////////////////////////////////////////////////////////////
-//categoriesOptions.js module
-////////////////////////////////////////////////////////////////
+/* global variable */
 
-// "categoriesOptions" užívá a importuje "setCheckboxes.js" i "index.js"
-/* export const categoriesOptions= {"category1":["badminton","basketbal","běh","florbal","fotbal","házená","nohejbal","ping pong","plavání","tenis","volejbal"],"category3":["hřiště otevřené","hřiště placené","tělocvična"],"category5":["Bohunice","Brno-sever","Brno-střed","Bystrc","Horní Heršpice","Jundrov","Kohoutovice","Komárov","Komín","Královo pole","Líšeň","Maloměřice a Obřany","Nový Lískovec","Starý Lískovec","Tuřany","Vinohrady","Černovice","Žabovřesky","Židenice","MU","Mendelu","UO","VUT"],"surface":["antuka","asfalt","gumový povrch","mondo","parkety","písek","tartan","tráva","umělá tráva","umělá tráva 3. generace","umělý povrch","umělý povrch (epdm)","umělý povrch (pur)","umělý povrch bez písku","umělý povrch s pískem","umělý povrch z plastu (nisaplast)"],"groupedByCategory3":[{"category3":"tělocvična","category1":["badminton","basketbal","florbal","fotbal","házená","ping pong","plavání","tenis","volejbal"],"category5":["Bohunice","Brno-střed","Bystrc","Jundrov","Kohoutovice","Komín","Královo pole","Nový Lískovec","Starý Lískovec","Tuřany","Vinohrady","Černovice","Žabovřesky","Židenice","MU","Mendelu","UO","VUT"],"surface":["gumový povrch","parkety","umělý povrch","umělý povrch (epdm)","umělý povrch (pur)","umělý povrch s pískem"]},{"category3":"hřiště otevřené","category1":["basketbal","florbal","fotbal","nohejbal","volejbal"],"category5":["Bohunice","Brno-sever","Brno-střed","Bystrc","Horní Heršpice","Jundrov","Kohoutovice","Komárov","Komín","Líšeň","Černovice","Žabovřesky","Židenice"],"surface":["asfalt","písek","tartan","umělý povrch bez písku","umělý povrch s pískem","umělý povrch z plastu (nisaplast)"]},{"category3":"hřiště placené","category1":["basketbal","běh","florbal","fotbal","házená","nohejbal","tenis","volejbal"],"category5":["Bohunice","Brno-střed","Bystrc","Jundrov","Kohoutovice","Komárov","Komín","Královo pole","Líšeň","Maloměřice a Obřany","Nový Lískovec","Starý Lískovec","Tuřany","Černovice","Židenice","MU","VUT"],"surface":["antuka","mondo","tartan","tráva","umělá tráva","umělá tráva 3. generace","umělý povrch s pískem"]}],"timestamp":"2024-06-25T07:32:12.069Z"}; */
+// užívána ve fci "initialCheck" (kterou užívá fce "letOnlyOneCheckboxBeSelected_of" (kterou importuje a užívá "setCheckboxes.js") i fci "reset" (kterou importuje a užívá "setLogic.js")) i fci "letOnlyOneCheckboxBeSelected_of" (kterou importuje a užívá "setCheckboxes.js")
+let lastCheckedCheckbox;
+
+// užívána ve fci "fillHTMLWithData"
+import {categoriesOptions} from './categoriesOptions.js';
 
 
-////////////////////////////////////////////////////////////////
-//function.js module
-////////////////////////////////////////////////////////////////
 
-/* for index.js */
+
+/* for setCheckboxes.js */
+
+function fillSearchFormWithCheckboxes(htmlDOMObject,innerHTMLData){
+ htmlDOMObject.innerHTML= innerHTMLData;
+}
+
+
+function letOnlyOneCheckboxBeSelected_of(checkboxes) {            // function called with parameter e.g. "document.querySelectorAll( 'input[type="checkbox"]' )"
+  checkboxes.forEach(function(checkbox){
+    checkbox.addEventListener("click", function(e){
+      e.preventDefault();
+      if (checkbox !== lastCheckedCheckbox) {
+        setTimeout( ()=>checkbox.checked=true , 0 );
+        lastCheckedCheckbox.checked=false;
+        lastCheckedCheckbox = checkbox;
+        checkbox.dispatchEvent(new Event('change'));
+        /* some additional code here */
+      }
+    })
+  })
+
+  initialCheck(checkboxes);
+}
+
+export {fillSearchFormWithCheckboxes, letOnlyOneCheckboxBeSelected_of}
+
+
+  /* for categoriesOptionsRefined.js */
+
+  function fillObjectWithInnerHTMLData(object,keyName,arrayOfOptions,name){
+    let innerHTMLData=""
+    arrayOfOptions.forEach(function(val){
+      innerHTMLData+=`<label for="${val}"> <input type="checkbox" name="${name}" id="${val}" value="${val}"> ${val}</label>`
+    })
+    object[keyName]= innerHTMLData;
+  }
+
+  export {fillObjectWithInnerHTMLData}
+
+
+
+
+
+/* for setLogic.js */
+
+function submit( e , form=document.getElementById("search-form") ) {
+ const query=concatURLSearchString(form);
+ if(query) history.pushState(null, null, query);
+ fillHTMLWithData(query);
+}
+
+function directEnterPage() {
+ const query=window.location.search;
+ if(!query) return;
+ fillHTMLWithData(query);
+}
+
+function reset ( e , cat3_Checkboxes=document.querySelectorAll("div#cat3-content input") ) {    // reset event function, i.e. default behaviour will reset form, then "initialCheck" happens
+  initialCheck(cat3_Checkboxes);
+}
+
 
 function concatURLSearchString(formElmObj) {               // will concat search string from data user did choice in the form (search string starts with question mark "?"; form element values with common "name" attribute are concatenated into one query parameter as "common_name=val1,val2,val3,...")
  const formData=new FormData(formElmObj);                  // saves data of each form element, values at time of "new FormData()" command execuation; only of element having "name" attribute ("name" value became "key" of "formData" instance), "<input type='checkbox'>" need also be "checked"; "<input type='number/text'>", if user didn't fill value, have still value of ""
@@ -40,69 +99,6 @@ function concatURLSearchString(formElmObj) {               // will concat search
 }
 
 
-/* for setCheckboxes.js and index.js */
-
-// funkci "initialCheck" užívá a importuje "setCheckboxes.js" i "index.js" (kvůli "index.js" musí být kód "checkbox.checked=true" uvnitř fce "setTimeout()", celou tuto fci v něm totiž spouští event kód elementu "<input type='reset'>", který skrze default behaviour resetuje formulář, i jeho checkboxy, tehdy ovšem kód "checkbox.checked=true" nefunguje běžně)
-/*
-function initialCheck(checkboxes){
-  let flag=true;
-
-  checkboxes.forEach(function(checkbox){
-    if(!checkbox.disabled && flag) {
-      setTimeout( ()=>checkbox.checked=true , 0 );
-      lastCheckedCheckbox = checkbox;
-      flag=false;
-      checkbox.dispatchEvent(new Event('change'));
-    }
-  })
-  if(!lastCheckedCheckbox) {
-    checkboxes[0].checked=true;
-    lastCheckedCheckbox=checkboxes[0];
-  }
-}
-*/
-
-
-//export {functionName1, functionName2, functionName3, ...};
-////////////////////////////////////////////////////////////////
-//index.js module script
-////////////////////////////////////////////////////////////////
-//import {categoriesOptions} from './categoriesOptions.js';
-//import {concatURLSearchString, initialCheck} from './function.js';
-
-const submitButton=document.getElementById("submit-button");
-const resetButton=document.getElementById("reset-button");
-const form=document.getElementById("search-form");
-
-const categories3=categoriesOptions.category3;                    // ["hřiště otevřené","hřiště placené","tělocvična"]
-const categories3_dbKeyNames= ["outdoor_free","outdoor_paid","indoor"];
-
-submitButton.addEventListener("click", submit);
-resetButton.addEventListener("click", reset);
-window.addEventListener("load", directEnterPage);
-window.addEventListener("popstate", directEnterPage);
-
-async function submit( e , contentDiv=document.getElementById("content") ) {
- const query=concatURLSearchString(form);
- if(query) history.pushState(null, null, query);
- const data=await fetchDataJSON(query);     /* for test ignore this line */
- /* for test --> const data=DATA(); */
- fillHTMLWith(data, categories3,categories3_dbKeyNames, contentDiv);
-}
-
-async function directEnterPage( e , contentDiv=document.getElementById("content") ) {
- const query=window.location.search;
- if(!query) return;
- const data=await fetchDataJSON(query);     /* for test ignore this line */
- /* for test --> const data=DATA(); */
- fillHTMLWith(data, categories3,categories3_dbKeyNames, contentDiv);
-}
-
-function reset ( e , cat3_Checkboxes=document.querySelectorAll("div#cat3-content input") ) {    // reset event function, i.e. default behaviour will reset form, then "initialCheck" happens
-  initialCheck(cat3_Checkboxes);
-}
-
-
 async function fetchDataJSON(query) {
  const url=`https://brno-sportground-query-response.vercel.app/${query}`;                     // doplní se adresa serveru, který zpracovává url a podle query vrací string objektu
  /* for test --> const url=`http://127.0.0.1:3000/${query}`; */                               /* for test ignore line above */
@@ -117,9 +113,10 @@ async function fetchDataJSON(query) {
 }
 
 
+async function fillHTMLWithData( query, categories3=categoriesOptions.category3 , categories3_dbKeyNames= ["outdoor_free","outdoor_paid","indoor"] , contentDiv=document.getElementById("content") ) {    // categories3=["hřiště otevřené","hřiště placené","tělocvična"]
+ const data=await fetchDataJSON(query);     /* for test ignore this line */
+ /* for test --> const data=DATA(); */
 
-
-function fillHTMLWith(data, categories3,categories3_dbKeyNames, contentDiv) {
  const output={HTML:""};
 
  const category3= data[0].categories6[0].categories7[0].categorization.category3;        // as it is possible to search in only one category3, all data from server received share equal and one category3 (every single cat6 and also every single cat5 have categories7 (the pitches) of only one kind category3); if search form would make possible to search in more than one, more than one (category3) would exist for each category6, same number or more for each category5, the code returning category3 would be split and properly placed, one kind for each cat5, other for each cat6, returning one or more category3 (iterating through all categories7 (the pitches) of cat5 or of cat6 seeking their categories7)
@@ -291,7 +288,6 @@ function fillHTMLWith(data, categories3,categories3_dbKeyNames, contentDiv) {
       }
 
 
-
 /* for test --> 
 function DATA(){
 
@@ -301,6 +297,31 @@ function DATA(){
 }
 
 */
+
+export {submit, directEnterPage, reset}
+
+
+
+
+/* for setCheckboxes.js and setLogic.js */
+
+// funkci "initialCheck" užívá fce "letOnlyOneCheckboxBeSelected_of" (kterou importuje a užívá "setCheckboxes.js") i fce "reset" (kterou importuje a užívá "setLogic.js") (kvůli užití v "reset" a této zase v "setLogic.js" musí být její kód "checkbox.checked=true" ještě uvnitř fce "setTimeout()", jelikož fce "reset" je event funkce elementu "<input type='reset'>", při jejím spuštění dojde skrze default behaviour k resetu formuláře, včetně jeho checkboxů, tehdy kód "checkbox.checked=true" nefunguje běžně)
+function initialCheck(checkboxes){
+  let flag=true;
+
+  checkboxes.forEach(function(checkbox){
+    if(!checkbox.disabled && flag) {
+      setTimeout( ()=>checkbox.checked=true , 0 );
+      lastCheckedCheckbox = checkbox;
+      flag=false;
+      checkbox.dispatchEvent(new Event('change'));
+    }
+  })
+  if(!lastCheckedCheckbox) {
+    checkboxes[0].checked=true;
+    lastCheckedCheckbox=checkboxes[0];
+  }
+}
 
 
 
