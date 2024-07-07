@@ -1,10 +1,10 @@
 
 /* global variable */
 
-// užívána ve fci "initialCheck" (kterou užívá fce "letOnlyOneCheckboxBeSelected_of" (kterou importuje a užívá "setCheckboxes.js") i fci "reset" (kterou importuje a užívá "setLogic.js")) i fci "letOnlyOneCheckboxBeSelected_of" (kterou importuje a užívá "setCheckboxes.js")
+// used in function "initialCheck" (which is used by function "letOnlyOneCheckboxBeSelected_of" (which is imported and used by "setCheckboxes.js") and function "reset" (which is imported and used by "setLogic.js")) and function "letOnlyOneCheckboxBeSelected_of" (which is imported and used by "setCheckboxes.js")
 let lastCheckedCheckbox;
 
-// užívána ve fci "fillHTMLWithData"
+// used in function "fillHTMLWithData"
 import {categoriesOptions} from './categoriesOptions.js';
 
 
@@ -100,7 +100,7 @@ function concatURLSearchString(formElmObj) {               // will concat search
 
 
 async function fetchDataJSON(query) {
- const url=`https://brno-sportground-query-response.vercel.app/${query}`;                     // doplní se adresa serveru, který zpracovává url a podle query vrací string objektu
+ const url=`https://brno-sportground-query-response.vercel.app/${query}`;                     // server address that processes url and returns json object according to query
  /* for test --> const url=`http://127.0.0.1:3000/${query}`; */                               /* for test ignore line above */
 
  try {
@@ -148,7 +148,7 @@ async function fillHTMLWithData( query, categories3=categoriesOptions.category3 
   }
 
   function cat6_contentStart(cat6,cat6_data,output){
-    output.HTML+=`<h3>${cat6.name}</h3> <span class="address">(${cat6_data?.address.street}${cat6_data?.address.district ? ", " + cat6_data.address.district : ""})</span><br>`;    // univerzity (nikoliv městské části), jejich kategorie6, mají v adrese i městskou část
+    output.HTML+=`<h3>${cat6.name}</h3> <span class="address">(${cat6_data?.address.street}${cat6_data?.address.district ? ", " + cat6_data.address.district : ""})</span><br>`;    // universities (not districts), its categories6, do include district in their address
   }
 
   function cat7_content(cat7,output){
@@ -163,7 +163,7 @@ async function fillHTMLWithData( query, categories3=categoriesOptions.category3 
     if(dimension.depth)  dimensionArr.push(dimension.depth);
     /* kód dělající totéž (musí být až za "const dimension=cat7.dimension;" )
     const dimensionArr=[ dimension.width, dimension.length, dimension.depth ]
-      .filter( val => val[0]!==null && val[0]!==undefined )                                                 // lze napsat i "val[0]!=null"
+      .filter( val => val[0]!==null && val[0]!==undefined )                                                 // can be written also "val[0]!=null"
     */
     if(dimensionArr.length!==0) {
       playgroundContentArr.push( `${dimensionArr.join("×")} m` );
@@ -258,7 +258,7 @@ async function fillHTMLWithData( query, categories3=categoriesOptions.category3 
           [ contact.phone?.value , contact.phone?.note ],
           [ contact.phone2?.value , contact.phone2?.note ],
         ]
-          .filter( val => val[0]!==null && val[0]!==undefined )                                       // lze napsat i "val[0]!=null"; odfiltruje z pole prvky [[prázdná hodnota],[prázdná hodnota]] (pokud má prázdnou hodnotu první prvek ".value", pak i ".note")
+          .filter( val => val[0]!==null && val[0]!==undefined )                                       // can be written also "val[0]!=null"; filters out elements [[empty value],[empty value]] from array (if empty value has first element, the ".value", then also the ".note")
           .map( val => { let newVal=formattedPhone(val[0]); if(val[1]) newVal+=` (${val[1]})`; return newVal } )
         */
         if (mailPhoneArr.length!==0) output.HTML+= mailPhoneArr.join("; ") + "<br>";
@@ -305,7 +305,7 @@ export {submit, directEnterPage, reset}
 
 /* for setCheckboxes.js and setLogic.js */
 
-// funkci "initialCheck" užívá fce "letOnlyOneCheckboxBeSelected_of" (kterou importuje a užívá "setCheckboxes.js") i fce "reset" (kterou importuje a užívá "setLogic.js") (kvůli užití v "reset" a této zase v "setLogic.js" musí být její kód "checkbox.checked=true" ještě uvnitř fce "setTimeout()", jelikož fce "reset" je event funkce elementu "<input type='reset'>", při jejím spuštění dojde skrze default behaviour k resetu formuláře, včetně jeho checkboxů, tehdy kód "checkbox.checked=true" nefunguje běžně)
+// function "initialCheck" is used by "letOnlyOneCheckboxBeSelected_of" (which is imported and used by "setCheckboxes.js") and function "reset" (which is imported and used by "setLogic.js") (because of usage in "reset" and of this one in "setLogic.js" its code "checkbox.checked=true" have to be in "setTimeout()", because "reset" is event function of html element "<input type='reset'>", while triggered form via default behaviour will be reset, including its checkboxes, at that time code "checkbox.checked=true" doesn't work in usual manner)
 function initialCheck(checkboxes){
   let flag=true;
 
