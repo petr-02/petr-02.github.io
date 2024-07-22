@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>sportoviště podle vlastností</title> <meta name="description" content="sportoviště v Brně podle zvolených vlastností">
+ <!-- <link rel="stylesheet" href=""> -->
+<!-- ------------------------------------------------------------ -->
+<style type="text/css">
+
+body            {font: 120% "Times New Roman", Times, serif; margin: 4.2vh 0.75% 64.5vh 3%}
+
+#flex-container {display:flex; flex-direction:column}
+ #flex-container > * {padding: 0.15em 0em}
+ #button-container {display:flex; flex-direction:row; margin-top: 0.75em}
+   #button-container > *:not(:nth-child(1)) {margin-left: 1em}
+
+
+input           {padding: 0.3em 0em 0.3em 0.3em; width:2.8em; margin: 0em 0.4em}
+label           {}
+
+button {
+  padding: 0.58em 0em;
+  width: 4.2em;
+  color: white;
+  background-color: grey;
+  transition: background-color 0.3s;
+  border: 0;
+  border-radius: 0.2em;
+}
+button:hover    {background-color: rgb(100,100,100)}
+#button-count   {}
+#button-reset   {}
+#button-default {}
+
+#p-content {margin-top: 3.5em}
+
+</style>
+<!-- ------------------------------------------------------------ -->
+</head>
+<body>
+
+<div id="flex-container">
+ <div> <label for="input-numberofsubgoalkeeper">number <input type="number" min="0" max="1" id="input-numberofsubgoalkeeper"> of goalkeeper substituted by everyone (0 if play without or with fulltime golie)</label></div>
+ <div> <label for="input-numberonfield">number <input type="number" min="0" max="20" id="input-numberonfield"> of on-field players</label></div>
+ <div> <label for="input-numberofsubstitute">number <input type="number" min="0" max="20" id="input-numberofsubstitute"> of substitute players</label></div>
+ <div> <label for="input-minutesofgame"> minutes <input type="number" min="0" max="180" step="5" id="input-minutesofgame"> of game</div>
+ <div id="button-container">
+   <button id="button-count">count</button>
+   <button id="button-reset">reset</button>
+   <button id="button-default">default</button>
+ </div>
+</div>
+
+<p id="p-content"></p>
+
+<script src="stridani.js"></script>
+</body>
+</html>
+
+
+
