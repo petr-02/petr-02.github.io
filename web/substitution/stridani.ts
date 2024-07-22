@@ -72,9 +72,9 @@ button.count.addEventListener("click", function(){
 
  if (!onfield || !gameminutes) return;
 
- const goalkeeperTime= subgoalkeeper / total  *  gameminutes;
- const substituteTime= substitute / total  *  gameminutes;
- const notFieldPercentage= ((subgoalkeeper + substitute) / total  *  100).toFixed(2);
+ const goalkeeperTime:string= ( subgoalkeeper / total  *  gameminutes ).toFixed(2);
+ const substituteTime:string= ( substitute / total  *  gameminutes ).toFixed(2);
+ const notFieldPercentage:string= ((subgoalkeeper + substitute) / total  *  100).toFixed(2);
 
  p.content.innerHTML=`Every player need to spend ${goalkeeperTime}&nbsp;minutes in goal and ${substituteTime}&nbsp;minutes substituting, that is altogether ${notFieldPercentage}&nbsp;% of whole game.`;
 })
