@@ -119,6 +119,8 @@ async function fillHTMLWithData( query, categories3=categoriesOptions.category3 
 
  const output={HTML:""};
 
+ if (data.length===0) {contentDiv.innerHTML=output.HTML; return}                         // if db returns empty data result
+
  const category3= data[0].categories6[0].categories7[0].categorization.category3;        // as it is possible to search in only one category3, all data from server received share equal and one category3 (every single cat6 and also every single cat5 have categories7 (the pitches) of only one kind category3); if search form would make possible to search in more than one, more than one (category3) would exist for each category6, same number or more for each category5, the code returning category3 would be split and properly placed, one kind for each cat5, other for each cat6, returning one or more category3 (iterating through all categories7 (the pitches) of cat5 or of cat6 seeking their categories7)
  const category3_dbKeyName= categories3_dbKeyNames[  categories3.indexOf(category3)  ];  // "category3" and relative "category3_dbKeyName" name are on same position in array, former in "categories3", latter in array "categories3_dBKeyNames"
 
