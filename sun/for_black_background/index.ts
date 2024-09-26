@@ -18,20 +18,24 @@ function letThereBeSunOnElement (sunElm:HTMLElement) {
  const smoothness:number=0.015;                            // time of one animation move, in seconds; for smoother animation lower number, but with bigger computing load
  const sunriseAndSunsetTime:number=15;                     // how long sun does rise, how long does set, in seconds
  const yellowDistance:number=25;
- const blackDistanceAtNight:number=27;                     // yellow is at ${yellowDistance}% (eg. 10%), at night black is at ${blackDistanceAtNight}% (eg. 11%), only ${blackDistanceAtNight - yellowDistance}% (eg. 1%) transition from yellow to black, no much room for sun yellow light
- const blackDistanceAtNoon:number=100;                     // yellow is at ${yellowDistance}%, at noon black is ${blackDistanceAtNoon}% (eg. 40%), ${blackDistanceAtNight - yellowDistance}% (eg. 30%) transition from yellow to black, giving room for sun yellow light
+ const blackDistanceAtNight:number=27;                     // yellow is at ${yellowDistance}% (eg. 25%), at night black is at ${blackDistanceAtNight}% (eg. 27%), only ${blackDistanceAtNight - yellowDistance}% (eg. 2%) transition from yellow to black, no much room for sun yellow light
+ const blackDistanceAtNoon:number=100;                     // yellow is at ${yellowDistance}%, at noon black is ${blackDistanceAtNoon}% (eg. 100%), ${blackDistanceAtNoon - yellowDistance}% (eg. 73%) transition from yellow to black, giving room for sun yellow light
  const blackColorStep:number= (blackDistanceAtNoon - blackDistanceAtNight) / (sunriseAndSunsetTime/smoothness);     // counting % of one animation move, the movement of black night
  let blackColorPosition:number= blackDistanceAtNight;      // animace starts at midnight, with sunRise=true
  let sunRise:boolean=true;                                 // if sun is about to rise (true), the code adding colorStep, if about to set (false), subtracting
 
+ const black="black";                                      // for possibility set other color for surrounding night
+ const yellow="yellow";                                    // for possibility set other color for sun ray
+ const red="red";                                          // for possibility set other color for sun hot center
+
  setInterval(()=>{
    if(sunRise){
      blackColorPosition+=blackColorStep;
-     sunElm.style.backgroundImage=`radial-gradient(circle closest-side, red 0% 0%, yellow ${yellowDistance}% ${yellowDistance}%, black ${blackColorPosition}% ${blackDistanceAtNoon}%)`;
+     sunElm.style.backgroundImage=`radial-gradient(circle closest-side, ${red} 0% 0%, ${yellow} ${yellowDistance}% ${yellowDistance}%, ${black} ${blackColorPosition}% ${blackDistanceAtNoon}%)`;
      if (blackColorPosition >= blackDistanceAtNoon) sunRise=false;    // ">=" instead of "===" because declaration of "blackColorStep" involves division, for which rounding may happen, then backward multiplication of blackColorStep will not exactly fit the original number
    } else {
      blackColorPosition-=blackColorStep;    
-     sunElm.style.backgroundImage=`radial-gradient(circle closest-side, red 0% 0%, yellow ${yellowDistance}% ${yellowDistance}%, black ${blackColorPosition}% ${blackDistanceAtNoon}%)`;
+     sunElm.style.backgroundImage=`radial-gradient(circle closest-side, ${red} 0% 0%, ${yellow} ${yellowDistance}% ${yellowDistance}%, ${black} ${blackColorPosition}% ${blackDistanceAtNoon}%)`;
      if (blackColorPosition <= blackDistanceAtNight) sunRise=true;
    }
  }, smoothness*1000 );
