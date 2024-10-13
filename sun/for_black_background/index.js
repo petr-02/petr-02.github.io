@@ -15,7 +15,7 @@ function letThereBeSunOnElement(sunElm) {
     const sunriseAndSunsetTime = 15; // how long sun does rise, how long does set, in seconds
     const yellowDistance = 25;
     const blackDistanceAtNight = 27; // yellow is at ${yellowDistance}% (eg. 25%), at night black is at ${blackDistanceAtNight}% (eg. 27%), only ${blackDistanceAtNight - yellowDistance}% (eg. 2%) transition from yellow to black, no much room for sun yellow light
-    const blackDistanceAtNoon = 100; // yellow is at ${yellowDistance}%, at noon black is ${blackDistanceAtNoon}% (eg. 100%), ${blackDistanceAtNoon - yellowDistance}% (eg. 73%) transition from yellow to black, giving room for sun yellow light
+    const blackDistanceAtNoon = 100; // yellow is at ${yellowDistance}%, at noon black is ${blackDistanceAtNoon}% (eg. 100%), ${blackDistanceAtNoon - yellowDistance}% (eg. 75%) transition from yellow to black, giving room for sun yellow light
     const blackColorStep = (blackDistanceAtNoon - blackDistanceAtNight) / (sunriseAndSunsetTime / smoothness); // counting % of one animation move, the movement of black night
     let blackColorPosition = blackDistanceAtNight; // animation starts at midnight, with sunRise=true
     let sunRise = true; // if sun is about to rise (true), the code adding colorStep, if about to set (false), subtracting
