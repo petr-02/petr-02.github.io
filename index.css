@@ -1,6 +1,6 @@
 
 
-/* tooltip top */  /* how to apply:  <elm class="tooltip-container">  <span class="tooltip-top">tooltip text</span>  </elm> */
+/* tooltip top */  /* how to apply: <elm class="tooltip-container"> element content <span class="tooltip-top">tooltip for element content</span> </elm> */
 
 .tooltip-container {
   position: relative;
