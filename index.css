@@ -1,0 +1,47 @@
+
+
+/* tooltip top */  /* how to apply:  <elm class="tooltip-container">  <span class="tooltip-top">tooltip text</span>  </elm> */
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-top {
+  font-size: smaller;
+  opacity:0;                                     /* visibility:hidden or opacity:0 */
+  /* transition:opacity 0.5s 0.5s ease-in; */    /* only for case of opacity, animated in both ways */
+  white-space: nowrap;                           /* tooltip text without wrapping being on one row, or replace with specific "width: ..." */
+
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  border-radius: 0.3vw;
+  padding: 0.1vw 0.6vw;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 45%;                                     /* for tooltip in center set "50%" */
+  /* transform: translateX(-50%); */             /* for tooltip in center */
+}
+
+.tooltip-top::after {                            /* tooltip arrow */
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 6.5%;                                    /* for tooltip in center set "50%" */
+  border-width: 0.3vw;
+  /* margin-left: -0.3vw; */                     /* for tooltip in center */
+  border-style: solid;
+  border-color: black transparent transparent transparent;        /* top triangle visible */
+}
+
+.tooltip-container:hover .tooltip-top {
+  opacity:0.75;                                  /* visibility:visible or opacity:... */
+  transition:opacity 0.5s 0.5s ease-in;          /* only for case of opacity, animated when tooltip popup */
+}
+
+
+
+
+
