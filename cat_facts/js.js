@@ -19,6 +19,7 @@ document.querySelector("h2").addEventListener("click", fillHTML)
 
 async function fillHTML () {
  pp.forEach( p => p.remove() );
+ while (pp.length) pp.pop();
  for(let i=n;i;i--) {
    const factObj= await fetchCatFact();
    const p=document.createElement("p");
