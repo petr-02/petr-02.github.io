@@ -1,5 +1,5 @@
 "use strict";
-const sun = document.getElementById("sun"); // eg. the "div" with style "height:400px; width:400px; position:absolute; top:15px; right:15px;"
+const sun = document.getElementById("sun"); // eg the "div" with style "height:400px; width:400px; position:absolute; top:15px; right:15px;"
 letThereBeSunOnElement(sun);
 setInitialStyleForElement(sun);
 function setInitialStyleForElement(sunElm) {

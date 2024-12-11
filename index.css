@@ -9,8 +9,9 @@
 
 .tooltip-top {
   font-size: smaller;
-  opacity:0;                                     /* visibility:hidden or opacity:0 */
-  /* transition:opacity 0.4s 0.5s ease-in; */    /* only for case of opacity, animated in both ways */
+  visibility: hidden;                            /* needed even if "opacity:0" is set, otherwise tooltip may cover content around and is still hoverable */
+  opacity: 0;                                    /* only for case of opacity animation */
+  /* transition:opacity 0.4s 0.5s ease-in, visibility 0.4s 0.5s ease-in; */     /* only for case of opacity animation, animated in both ways */
   white-space: nowrap;                           /* tooltip text without wrapping being on one row, or replace with specific "width: ..." */
 
   background-color: #000;
@@ -37,8 +38,9 @@
 }
 
 .tooltip-container:hover .tooltip-top {
-  opacity:0.75;                                  /* visibility:visible or opacity:... */
-  transition:opacity 0.4s 0.5s ease-in;          /* only for case of opacity, animated when tooltip popup */
+  visibility:visible;
+  opacity:0.75;                                  /* only for case of opacity animation */
+  transition:opacity 0.4s 0.5s ease-in;          /* only for case of opacity animation, animated when tooltip popup */
 }
 
 
