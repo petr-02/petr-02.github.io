@@ -1,0 +1,7 @@
+
+.exe soubor vytvořen příkazem
+pyinstaller --onedir --windowed nazev_souboru.py
+
+předtím ještě příkaz
+pip install pyinstaller
+
