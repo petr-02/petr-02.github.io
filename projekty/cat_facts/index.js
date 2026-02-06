@@ -31,10 +31,10 @@ async function fillHTML () {
 
   async function fetchCatFact (url='https://catfact.ninja/fact') {
    try {
-     const res = await fetch(url);    if (!res.ok) { throw new Error("network response wasn't 'ok'") }
+     const res = await fetch(url);    if (!res.ok) { throw new Error(`response wasn't 'ok' with ${res.status}`) }
      return await res.json();
    }
-   catch (error) { console.error("problem with fetch operation:", error) }
+   catch (error) { console.error("problem with fetch operation,", error) }
   }
 
 
