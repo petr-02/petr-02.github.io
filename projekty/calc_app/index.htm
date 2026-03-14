@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="cs"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="calc-space-content.css">
+</head>
+<body>
+
+<label for="calc_name_pick-input-field" id="calc_name_pick-input-label">Pick the calculation: </label><br>
+<input type="text" id="calc_name_pick-input-field" name="calcNamePickInput" list="calc_names-list" autofocus size="20">
+ <datalist id="calc_names-list">
+   <!-- option values, the calc names given in html, need have at least 4 letters (see the index.js code) -->
+   <option value="distance-speed-time">
+   <option value="percentage">
+ </datalist>
+
+<div id="calc-space"></div>
+
+<script type="module" src="index.js"></script>
+<script src="calc/distance_speed_time.js"></script>
+<script src="calc/percentage.js"></script>
+</body></html>
+

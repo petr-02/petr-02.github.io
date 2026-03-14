@@ -1,0 +1,8 @@
+
+v "index.js" se doplní "connection string"
+
+spustí se "node index" (jednorázově, při změnách v databázi)
+
+případně se spustí "node index" v "generate_options_for_html" (přidávalo-li se sportoviště s "category3", "category1" nebo "category5", která zatím nebyla v databázi u žádného sportoviště; nebo se "surface", který zatím nebyl v databázi u žádného sportoviště o stejné kategorii 3)
+ více viz "generate_options_for_html\!info.txt"
+

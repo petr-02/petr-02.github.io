@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="cs"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style type="text/css">
+<!--
+body                    {margin:0; padding:0; border: 0; font: 0.96vw "Times New Roman", serif}
+div#trida               {
+  margin: 0.5vw; padding: 0.6vw 0.62vw;
+  display:flex;
+  box-sizing: border-box;			/* width+height udává velikost border + padding + content */
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 99vw;					/* 100vw = 99vw + 2*0.5 margin left-right */
+  border: 0.1vw solid #849FC1
+}
+div#trida > div         {width: 13.5vw; border: 0.11vw solid #9abffe;  margin: 0.3vw; padding: 0.5vw}
+div#trida > div:hover	{border: 0.11vw solid #0096FF}
+div#trida > div.pruchod {width: 2vw; border: 0; padding: 0}		/* vlastnosti nastavené v "div#trida > div.pruchod" mají vyšší prioritu, než nastavené v "div#trida > div" i "div#trida > div:hover" */
+-->
+</style></head>
+<body>
+
+<div id="trida">
+ <div>Hejtmánek Michal / Püschner</div> <div>Váslavková Šárka / Lorenc Josef</div> <div>Laštovková (Hrdličková) Daniela</div>
+ <div class="pruchod"></div>
+ <div></div> <div>Gottweisová Nella</div> <div>Leskovjanová Jana</div>
+
+ <div>Cypris Michal</div> <div>Kovařík Jakub</div> <div>Beller Petr</div>
+ <div class="pruchod"></div>
+ <div></div> <div>Horáková (nevědělová) Klára</div> <div>Cáhová Mirka</div>
+
+ <div>Vrtílek Pavel</div> <div>Stejkora Robert</div> <div>Singer Vojtěch</div>
+ <div class="pruchod"></div>
+ <div>Štilárková Edita</div> <div>Vymazalová Kamila</div> <div>Tunkrová Iveta</div>
+
+ <div>Lundová (Voráčová) Veronika</div> <div>Durnová (Létalová) Markéta</div> <div></div>
+ <div class="pruchod"></div>
+ <div></div> <div>Slámová (Blahová) Věra</div> <div>Červinková (Rychtecká) Lucie</div>
+
+ <div>Koláčková (Kaňová) Dana</div> <div>Dvořáková (Padalíková) Ladislava</div> <div>Letáčková (Tůmová) Helena</div>
+ <div class="pruchod"></div>
+ <div></div> <div>Svobodová Tereza</div> <div>Ševčíková (Vaňková) Jitka</div>
+
+ <div>Bartáková (Šnoblová) Marie</div> <div>Šlofová Hana</div> <div>Vybíralová (Pučková) Dagmar</div>
+ <div class="pruchod"></div>
+ <div>Procházková (Hovězákova) Eva</div> <div>Skalský Tomáš / Šťasta Michal</div> <div>Grabarczyk Adam</div>
+</div>
+
+
+
+
+<script>
+ const misto = document.querySelectorAll("div#trida > div:not(div#trida > div.pruchod)")	// pole s prvky [0] [1] [2] ... [35], obsahující odkazy na "div" objekty míst; tj. [0] souvisí s místem vlevo vepředu, [35] vpravo vzadu
+
+ const hlaskyUcitelu = [ ", přestaňte žvanit.", ", dávejte pozor.", ", tak co jsem řekla?!", ", vy si nedáte pokoj, že?!", ", už mi právě dochází trpělivost!", ", máte za jedna.", ", máte za dva.", ", kde jste byl(a) minulý týden.", ", povězte i nám ostatním, o čem si tam povídáte, když je to tak zajímavé.", ", posbírejte písemky.", ", pojďte k tabuli.", ", nakreslete nám to.", ", nemluvte mi při písemce.", ", co to tam máte pod stolem?", ", to snad nemyslíte vážně.", ", zopakujte to? dobře jsem vám nerozuměla.", ", nemyslete si, že vám tohleto projde!", ", proč se koukáte k sousedovi?", ", kam se to koukáte?", ", nevím o tom, že bych dala povel k mluvení.", ", jaktože nedáváte pozor! chcete zase dostat pětku?", ", ztiště se.", ", kolikrát vám mám opakovat, abyste zmlkl(a)!", ", nebyl(a) jste tu minulý týden, ale tu písemku si dopíšete, nemyslete si, že tomu jen tak uniknete!", ", to mě nezajímá, že jste chyběl(a), pojďte k tabuli.", ", přestaňte opisovat, nebo budete mít za pět!", ", to mě nezajímá, že máte hlad! na jezení jste měl(a) celou přestávku!", ", dávejte sakra pozor!", ", přestaňte se vymlouvat!", ", jestli toho nenecháte, tak se mnou půjdete do ředitelny.", ", jestli nepřestanete, dostanou kvůli vám všichni domácí úkol!", ", to je váš problém, že jste to nevěděl(a), máte dávat pozor, když k vám mluvím.", ", nepřejte si mě!", ", já vás varovala, pojďte k tabuli.", ", to se týkalo i vás.", ", na co čekáte?", ", nemyslete si, že vám to prominu, zase tak hodná nejsem.", ", vy jste se na to ani nepodíval(a), viďte že ne?", ", jaktože nemáte domácí úkol?" ]
+ const pocetHlasekUcitelu = hlaskyUcitelu.length
+
+ function rndHlaskaUcitele (jmenoZaka){
+   const rndCisloHlasky = Math.floor(  Math.random() * pocetHlasekUcitelu  )		// náhodné číslo 0 až počet hlášek učitelů - 1
+   return jmenoZaka + hlaskyUcitelu[ rndCisloHlasky ]					// fce vrací z pole "hlaskyUcitelu" text náhodné hlášky, náhodně vybere prvek pole z prvků [0] [1] [2] ... [n-1]
+ }
+
+ for(let i=0; i<36; i++){								// iteruje prvky [0] [1] [2] ... [35]  (tj. postupně každé místo v lavici, dohromady 36)
+   const zakovoJmeno = misto[i].innerHTML
+   if(zakovoJmeno!==""){								// jen není-li "misto[i]" prázdné
+     const funkce = function(){  alert( rndHlaskaUcitele(zakovoJmeno) )  }		// vytvoří pro něj event listener funkci "funkce"; fce tedy (nastane-li event a je tedy sama zavolána), mimo jiného, ve svém těle volá funkci "rndHlaskaUcitele", přičemž jí předává "zakovoJmeno"
+     misto[i].addEventListener("click", funkce )					// přiřadí "misto[i]" event listener funkci "funkce"
+   }
+ }
+
+</script>
+</body></html>
+
+
+
+

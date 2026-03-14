@@ -1,0 +1,9 @@
+
+aplikace se spouští souborem
+to-do.vbs
+nebo
+to-do.bat                              # ponechává minimalizované okno pythonu, který spustil aplikaci, tato ale do konzole a okna nic nevrací
+
+ke spuštění je třeba mít nainstalovaný python, ke stažení na
+https://www.python.org                 # downloads -> windows -> windows installer (64-bit)
+

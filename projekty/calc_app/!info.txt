@@ -1,0 +1,11 @@
+
+=jak přidat nový výpočet do aplikace=
+1) přidá se html tag "<option value='nazev_noveho_vypoctu_jak_bude_zobrazovan_uzivateli'>" --> do index.html, uvnitř <datalist>
+2) vytvoří se soubor modulu "Nazev_podobny_nazvu_zobrazovanemu_uzivateli_v_datalistuModule.js" --> do adresáře "calc"; do souboru se nakóduje string s html kódem výpočtu a exportuje se (string bude později importován do index.js, který jej vloží do dom html elementu <div id="calc-space">, který je definován v index.html) (název .js souboru může být ve skutečnosti jakýkoliv)
+3) vytvoří se soubor js     "nazev_podobny_nazvu_zobrazovanemu_uzivateli_v_datalistu.js" --> do adresář "calc"; do něj se vloží logika html kódu definovaného v modulu (název .js souboru může být ve skutečnosti jakýkoliv)
+4) přídá se html tag "<script src='calc/nazev_podobny_nazvu_zobrazovanemu_uzivateli_v_datalistu.js'>" --> do index.html (název musí odpovídat .js souboru vytvořenému o řádek výše)
+5) přidá se css kód pro html kód v modulu --> do calc-space-content.css
+
+6) přidá se "import nazev_podobny_nazvu_zobrazovanemu_uzivateli_v_datalistu from "./calc/Nazev_podobny_nazvu_zobrazovanemu_uzivateli_v_datalistuModule.js" --> do index.js (název proměnné nesoucí kód import může být ve skutečnosti jakýkoliv)
+7) přidá se key:variable "nazev_noveho_vypoctu_jak_bude_zobrazovan_uzivateli: nazev_podobny_nazvu_zobrazovanemu_uzivateli_v_datalistu" --> do index.js, objektu "importedCalcModules" (název za dvojtečkou musí být shodný s názvem proměnné nesoucí kód import)
+

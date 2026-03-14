@@ -1,0 +1,43 @@
+
+body {background-color: white}
+
+@property --percentage {
+ syntax: "<percentage>";
+ initial-value: 0%;
+ inherits: false;
+}
+
+@keyframes sun {
+ 0%    { --percentage: 11% }                /* animation starts at midnight - yellow is at 25%, black at 27%, only 27-25%= 2% transition from yellow to black, no much room for sun yellow light */
+ 37.5% { --percentage: 18% }                /* in average, hopefully, ~37.5% of the day is dark (in Czech republic in 2024, the shortest night was on July 20, about 7h46m from sunset to sunrise, longest on December 21, about 11h49m, from these average is 9h45m30s, in fact there is yet light for about 20-25minutes after sunset and hopefully also 20-25minute before sunrise, i.e. ~9h of dark, i.e. ~37.5% of the day is dark) (animation goes back and forth, starting with second half of the night (at midnight), then first half of the sunny day follow, in way back both of these times are doubled, thus 37.5% is correct) */
+ 100%  { --percentage: 40% }                /* animation ends at noon - yellow is at 25%, black at 100%, 100-25%= 75% transition from yellow to black, giving room for sun yellow light */
+}
+
+div#sun {
+ height: min(40vw, 40vh);
+ width: min(40vw, 40vh);
+ position: absolute;
+ top: min(0.8vw, 0.8vh);
+ right: min(0.8vw, 0.8vh);
+
+ background-image: radial-gradient(
+   circle closest-side,
+   red 0% 0%,                               /* sun hot center */
+   yellow 10% 10%,                          /* sun ray */
+   black var(--percentage) 40%,             /* surrounding night */ /* second color stop is meant to be equal with "--percentage" at 100% keyframe */
+   white
+ );
+
+ animation-name: sun;
+ animation-duration: 24s;
+ animation-delay: 1s;                       /* some time to user get from shock of page being loaded */
+ animation-timing-function: linear;
+ animation-iteration-count: infinite;       /* if non infinite value, set odd number, if you wish see sun going forward and backward (alternate "direction") */
+ animation-direction: alternate;            /* keyframes starts at midnight and ends at noon, if contrary result is needed, instead of "alternate" do set "alternate-reverse" */
+ animation-fill-mode: both;                 /* value "both" for the possibility animation will have non zero "delay" and non infinite "iteration-count" (if only non zero "delay" value "backwards" is sufficient, if only non infinite "iteration-count" value "forwards" is sufficient, if nor this, nor that, value "none" is sufficient ("none" is default and in that case property does not need to be set at all)) */
+}
+
+
+
+
+

@@ -1,0 +1,49 @@
+
+
+/* tooltip top */  /* how to apply: <elm class="tooltip-container"> element content <span class="tooltip-top">tooltip for element content</span> </elm> */
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-top {
+  font-size: smaller;
+  visibility: hidden;                            /* needed even if "opacity:0" is set, otherwise tooltip may cover content around and is still hoverable */
+  opacity: 0;                                    /* only for case of opacity animation */
+  /* transition:opacity 0.4s 0.5s ease-in, visibility 0.4s 0.5s ease-in; */     /* only for case of opacity animation, animated in both ways */
+  white-space: nowrap;                           /* tooltip text without wrapping being on one row, or replace with specific "width: ..." */
+
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  border-radius: 0.3vw;
+  padding: 0.1vw 0.6vw;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 45%;                                     /* for tooltip in center set "50%" */
+  /* transform: translateX(-50%); */             /* for tooltip in center */
+}
+
+.tooltip-top::after {                            /* tooltip arrow */
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 6.5%;                                    /* for tooltip in center set "50%" */
+  border-width: 0.3vw;
+  /* margin-left: -0.3vw; */                     /* for tooltip in center */
+  border-style: solid;
+  border-color: black transparent transparent transparent;        /* top triangle visible */
+}
+
+.tooltip-container:hover .tooltip-top {
+  visibility:visible;
+  opacity:0.75;                                  /* only for case of opacity animation */
+  transition:opacity 0.4s 0.5s ease-in;          /* only for case of opacity animation, animated when tooltip popup */
+}
+
+
+
+
+

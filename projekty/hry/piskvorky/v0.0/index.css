@@ -1,0 +1,58 @@
+
+header {margin: 10px 0px}
+
+#span-displaying-who-is-turn {font-weight: bold}
+
+#input-dimension-of-playground-x, #input-dimension-of-playground-y {
+ border: 1px solid #767676;
+ padding: 2px 3px; margin: 5px 0px;
+ width: 40px; color: grey;
+}
+
+button, p {margin: 0px 0px 7px 0px}
+
+
+#div-tic-tac-toe-grid-container {
+ margin: 10px 5px;
+ display: inline-grid;
+ background-color: dodgerBlue;
+ gap: 1px; padding: 1px;
+ grid-template-columns: repeat(15,30px);
+ grid-template-rows: repeat(15, 30px);
+}
+#div-tic-tac-toe-grid-container > div {
+ background-color: white;
+ position: relative;
+}
+
+.circle::before {
+ content: '';
+ width: 95%; height: 95%;
+ border: 2px solid blue; box-sizing: border-box;
+ border-radius: 50%;
+ position: absolute;
+ left: 50%; top: 50%;
+ transform: translate(-50%,-50%);
+}
+
+.cross::before {
+ content: '';
+ width: 130%; height: 2px;
+ background-color: green;
+ position: absolute;
+ left: 50%; top: 50%;
+ transform: translate(-50%,-50%) rotate(45deg);
+}
+.cross::after {
+ content: '';
+ width: 130%; height: 2px;
+ background-color: green;
+ position: absolute;
+ left: 50%; top: 50%;
+ transform: translate(-50%,-50%) rotate(-45deg);
+}
+
+
+
+
+

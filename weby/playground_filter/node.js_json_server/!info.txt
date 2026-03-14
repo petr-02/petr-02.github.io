@@ -1,0 +1,7 @@
+
+ve "function.js" se doplní "connection string"
+
+spuštěný "index.js" na node.js serveru čeká na request klienta, kterému response/odpoví data sportovišť podle zaslaných query parametrů (z těchto se v html tvoří výstup a zobrazuje uživateli, který parametry zvolil)
+
+
+

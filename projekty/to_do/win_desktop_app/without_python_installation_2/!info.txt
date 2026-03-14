@@ -1,0 +1,10 @@
+
+.exe soubor vytvořen příkazem          # s option -3.12 protože tou dobou nuitka novější python nepodporoval)
+py -3.12 -m nuitka --standalone --onefile --mingw64 --enable-plugin=tk-inter --windows-console-mode=disable nazev_souboru.py
+
+předtím ještě příkaz
+py -3.12 -m pip install nuitka         # tj. instalace nuitka do python verze 3.12
+
+a ještě před tím doinstalován
+python 3.12
+

@@ -1,0 +1,45 @@
+
+.input-container-group {
+  margin-top: 2vw
+}
+
+.input-container {
+  margin-bottom: 1.3vw;
+}
+
+.input-field {
+  font-size: 1vw;
+  padding: 0.45vw;
+  border: 1px solid #666;
+  border-radius: 0.2vw;
+}
+
+.input-label {
+  margin-left: 0.55vw;
+  line-height: 2.2vw;
+  color: #666;
+  vertical-align: bottom;
+}
+
+.calculate-input-button-container {
+  margin-top: 2.8vw;
+}
+
+.calculate-input-button {
+  font-size: 0.9vw;
+  padding: 0.6vw 1.2vw;
+  border: none;
+  color: #ffffff;
+  background-color: #4CAF50;
+  transition: background-color 0.21s;
+  border-radius: 4px;
+}
+
+.calculate-input-button:hover {
+  background-color: #45a049;
+}
+
+.short_foreword_explanation-paragraph {
+  font-size: 1.2vw;
+  color: #666
+}

@@ -1,0 +1,7 @@
+
+ve "function.js" se doplní "connection string"
+
+1) spustí se "node index"
+2) vytvořený soubor "categoriesOptions" se přesune do html (jde o options, z pomocí kterých se v html search form tvoří jednotlivé checkboxy)
+(spouští se jednorázově, např. při změnách v databázi, aby se nezatěžoval server, navíc tedy ručně)
+
